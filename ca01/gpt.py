@@ -7,8 +7,6 @@ To run this you need to
 * next create a folder and put this file in the folder as gpt.py
 * finally run the following commands in that folder
 
-#For Marco API key = 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
- 
 On Mac
 % pip3 install openai
 % export APIKEY="......."  # in bash
