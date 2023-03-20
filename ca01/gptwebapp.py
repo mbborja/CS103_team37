@@ -38,6 +38,7 @@ def index():
         <br>  
         <a href="{url_for('pokemonteam')}">Find the best pokemon team </a>
         <br>
+         <a href="{url_for('genshinteam')}">Genshin team generator </a><br>
         <a href="{url_for('team')}"> About CS103 Team 37 </a> 
 
     '''
@@ -53,7 +54,8 @@ def team():
         <h3> Noah Goble </h3>
         
         <h3> Alice Zeng </h3>
-        
+        <a> Alice is a Studio Art and Computer Science double major responsible for the genshin team generator page.<br>
+        <a href="{url_for('genshinteam')}"> Genshin Team Generator </a><br>
         <br>
         <a href={url_for('index')}>Return to main menu</a>
     '''
@@ -169,6 +171,53 @@ def gptdemo():
         <a href={url_for('index')}>Return to main menu</a>
         <br>
         '''
+
+@app.route('/genshinteam', methods=['GET','POST'])
+def genshinteam():
+    if request.method == 'GET':
+        return f'''
+        <h1>Genshin Team Builder</h1>
+        <form method="POST">
+            <label for="reaction">Select an elemental reaction</label>
+            <select name="reaction" id="r">
+            <option value="vaporize">Vaporize</option>
+            <option value="overloaded">Overload</option>
+            <option value="electrocharged">Electrocharge</option>
+            <option value="melt">Melt</option>
+            <option value="superconduct">Superconduct</option>
+            <option value="burning">Burn</option>
+            <option value="bloom">Bloom</option>
+            <option value="hyperbloom">Hyperbloom</option>
+            <option value="quicken">Quicken</option>
+            <option value="burning">Burning</option>
+            <option value="swirl">Swirl</option>
+            <option value="crystallize">Crystallize</option><br>
+            <input type=submit value="enter"><br>
+            <a href={url_for('genshin_team_about')}> about</a><br>
+        </form>
+        '''
+    elif request.method == 'POST':
+        reaction = request.form['reaction']
+        prompt = "Build an optimal genshin team of four characters based on the elemental reaction: " + reaction + ". List the characters with their recommended build"
+        answer = gptAPI.getResponse(prompt)
+
+        return f'''
+        <h2> Generated Team </h2>
+        Genshin team based around the {reaction} elemental reaction<br>
+        <pre>{answer}</pre><br>
+        <a href={url_for('genshinteam')}> generate another team</a><br>
+        '''
+    else:
+        return 'unknown HTTP method: '+ str(request.method)
+
+@app.route('/genshinteam_about')
+def genshin_team_about():
+    return f'''
+    <h1> About </h1>
+    <a> This generates a genshin team based on a specified elemental reaction.</a><br>
+    <a href="{url_for('genshinteam')}"> Return to team generation </a><br>
+    <a href={url_for('index')}>Return to main menu</a><br>
+    '''
 
 if __name__=='__main__':
     # run the code on port 5001, MacOS uses port 5000 for its own service :(
