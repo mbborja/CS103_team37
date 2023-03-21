@@ -230,7 +230,7 @@ def poeminator_about():
         <br>
         <a href={url_for('index')}>Return to main menu</a>
         <br>
-        <a href="{url_for('poeminator')}"> Return to team generation </a>
+        <a href="{url_for('poeminator')}"> Return to poeminator </a>
     '''
 
 @app.route('/poeminator', methods=['GET','POST'])
@@ -239,14 +239,11 @@ def poeminator():
         Gets the request for a poem and returns the GPT response
     '''
     if request.method == 'POST':
-        prompt = request.form['prompt']
         adjs = request.form['adjs']
-        prompt = prompt
-        response = gptAPI.poeminator(prompt,adjs)
+        response = gptAPI.poeminator(adjs)
         return f'''
         <h1>Generated Poem</h1>
         <pre>Here is your generated poem with {adjs} as qualities. </pre>
-        <pre style="bgcolor:blue">Additional information: {prompt}</pre>
         <hr>
         Here is the answer in text mode:
         <div style="border:thin solid black">{response}</div>
@@ -263,12 +260,15 @@ def poeminator():
         <h1>Personalized Poem Generator</h1>
         <form method="post">
             <label for="adjectives">Input adjectives to describe the poem you'd like, separated by commas. </label>
-            <p><input name="ajs" id="adjs">
+            <br>
+            <textarea name="adjs"></textarea>
+            <p><input type=submit value="get response">
+            <br>
             <br>
             <br>
             <a href={url_for('index')}>Return to main menu</a>
             <br>
-            <a href={url_for('pokemon_team_about')}> About</a>
+            <a href={url_for('poeminator_about')}> About</a>
         </form>
         '''
 
