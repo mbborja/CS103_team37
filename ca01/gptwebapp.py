@@ -39,6 +39,8 @@ def index():
         <a href="{url_for('pokemonteam')}">Find the best pokemon team </a>
         <br>
          <a href="{url_for('genshinteam')}">Genshin team generator </a><br>
+        <a href="{url_for('poeminator')}">Generate a poem </a>
+        <br>
         <a href="{url_for('team')}"> About CS103 Team 37 </a> 
 
     '''
@@ -52,7 +54,7 @@ def team():
         <a> Marco is a Physics Major and Computer Science Minor. He coded the pokemon team generator page. And set up the /team, and /pokemonteam_about pages. </a>
         <a href="{url_for('pokemonteam')}"> Pokemon Team Generator </a>
         <h3> Noah Goble </h3>
-        
+        <a> Noah is majoring in Computer Science and Digital Technology and Culture, a major he designed through Brandeis's independent interdisciplinary major program. </a>        
         <h3> Alice Zeng </h3>
         <a> Alice is a Studio Art and Computer Science double major responsible for the genshin team generator page.<br>
         <a href="{url_for('genshinteam')}"> Genshin Team Generator </a><br>
@@ -218,6 +220,62 @@ def genshin_team_about():
     <a href="{url_for('genshinteam')}"> Return to team generation </a><br>
     <a href={url_for('index')}>Return to main menu</a><br>
     '''
+
+@app.route('/poeminator_about')
+def poeminator_about():
+    ''' Display about poeminator'''
+    return f'''
+        <h1> About the poem generator </h1>
+        <a> This generates a short poem based on the adjectives inputted. </a>
+        <br>
+        <a href={url_for('index')}>Return to main menu</a>
+        <br>
+        <a href="{url_for('poeminator')}"> Return to team generation </a>
+    '''
+
+@app.route('/poeminator', methods=['GET','POST'])
+def poeminator():
+    '''
+        Gets the request for a poem and returns the GPT response
+    '''
+    if request.method == 'POST':
+        prompt = request.form['prompt']
+        adjs = request.form['adjs']
+        prompt = prompt
+        response = gptAPI.poeminator(prompt,adjs)
+        return f'''
+        <h1>Generated Poem</h1>
+        <pre>Here is your generated poem with {adjs} as qualities. </pre>
+        <pre style="bgcolor:blue">Additional information: {prompt}</pre>
+        <hr>
+        Here is the answer in text mode:
+        <div style="border:thin solid black">{response}</div>
+        Here is the answer in "pre" mode:
+        <pre style="border:thin solid black">{response}</pre>
+        <a href={url_for('poeminator')}> make another query</a>
+        <br>
+        <a href={url_for('index')}>Return to main menu</a>
+        <br>
+        <a href={url_for('poeminator_about')}> About</a>
+        '''
+    else:
+        return f'''
+        <h1>Personalized Poem Generator</h1>
+        <form method="post">
+            <label for="adjectives">Input adjectives to describe the poem you'd like, separated by commas. </label>
+            <p><input name="ajs" id="adjs">
+            <br>
+            <br>
+            <a href={url_for('index')}>Return to main menu</a>
+            <br>
+            <a href={url_for('pokemon_team_about')}> About</a>
+        </form>
+        '''
+
+
+
+
+
 
 if __name__=='__main__':
     # run the code on port 5001, MacOS uses port 5000 for its own service :(

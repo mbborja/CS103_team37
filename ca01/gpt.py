@@ -58,6 +58,18 @@ class GPT():
             temperature=0.8,
         )
 
+    def poeminator(self, adjs):
+        
+        pre_prompt = "Make a poem that is "
+        completion = openai.Completion.create(
+            engine = self.model_engine,
+            prompt = pre_prompt + adjs,
+            max_tokens = 1024,
+            n = 1,
+            stop = None,
+            temperature = 0.8
+        )
+
         response = completion.choices[0].text
         return response
 
