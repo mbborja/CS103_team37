@@ -35,8 +35,8 @@ class Transaction():
         categories = [row[0] for row in rows]
         return categories
 
-    def add_category(self):
-        self.cursor.execute('INSERT INTO transactions (category) VALUES (?)', (category,))
+    def add_category(self, category): #edited by Noah
+        self.cursor.execute('INSERT INTO transactions (category) VALUES (?)', ( ))
         self.con.commit()
 
     def modify_category(self, old, new):
@@ -63,12 +63,24 @@ class Transaction():
         sum = [{'date': row[0], 'total': row[1]} for row in rows]
         return sum
 
-    # def summarize_by_month(self):
-
-    # def summarize_by_year(self):
-
-    # def summarize_by_category(self):
-
+    def summarize_by_month(self): #Noah - DATES MUST BE FORMATTED AS MM*DD*YYYY WHERE * CAN BE ANY CHARACTER
+        self.cursor.execute('SELECT SUBSTR(date, 1, 2) AS month, SUM(amount) FROM transactions GROUP BY month')
+        rows = self.cursor.fetchall()
+        sum = [{'month': row[0], 'total': row[1]} for row in rows]
+        return sum
+    
+    def summarize_by_year(self): #Noah   
+        self.cursor.execute('SELECT SUBSTR(date, 7, 10) AS year, SUM(amount) FROM transactions GROUP BY year')
+        rows = self.cursor.fetchall()
+        sum = [{'year': row[0], 'total': row[1]} for row in rows]
+        return sum
+    
+    def summarize_by_category(self): #Noah
+        self.cursor.execute('SELECT category, SUM(amount) FROM transactions GROUP BY category')
+        rows = self.cursor.fetchall()
+        sum = [{'category': row[0], 'total': row[1]} for row in rows]
+        return sum
+    
     def print_menu(self):
         print("Transaction Tracker Menu:")
         print("1. Show categories")
