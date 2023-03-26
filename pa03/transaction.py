@@ -56,3 +56,29 @@ class Transaction():
     def delete_transaction(self, number):
         self.cursor.execute('DELETE FROM transactions WHERE item_number=?', (number))
         self.con.commit()
+
+    def summarize_by_date(self):
+        self.cursor.execute('SELECT date, SUM(amount) FROM transactions GROUP BY date')
+        rows = self.cursor.fetchall()
+        sum = [{'date': row[0], 'total': row[1]} for row in rows]
+        return sum
+
+    # def summarize_by_month(self):
+
+    # def summarize_by_year(self):
+
+    # def summarize_by_category(self):
+
+    def print_menu(self):
+        print("Transaction Tracker Menu:")
+        print("1. Show categories")
+        print("2. Add category")
+        print("3. Modify category")
+        print("4. Show transactions")
+        print("5. Add transaction")
+        print("6. Delete transaction")
+        print("7. Summarize transactions by date")
+        print("8. Summarize transactions by month")
+        print("9. Summarize transactions by year")
+        print("10. Summarize transactions by category")
+        print("11. Quit")
