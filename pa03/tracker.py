@@ -10,6 +10,10 @@ def print_usage():
             5. add transaction
             6. delete transaction (item number)
             7. summarize transactions by date
+            8. summarize transactions by month
+            9. summarize transactions by year
+            10. summarize by category
+            11. print menu
             '''
             )
 
@@ -46,6 +50,17 @@ def process_args(arglist):
             transactions.delete_transaction(arglist[1])
     elif arglist[0] == "7":
         transactions.summarize_by_date()  #dont know if this works
+    elif arglist[0] == "8":
+        print("not yet implemented")
+        #transactions.summarize_by_month()
+    elif arglist[0] == "9":
+        print("not yet implemented")
+        #transactions.summarize_by_year()
+    elif arglist[0] == "10":
+        print("not yet implemented")
+        #transactions.summarize_by_category()
+    elif arglist[0] == "11":
+        print_usage()
     else:
         print(arglist, "is not implemented")
         print_usage()

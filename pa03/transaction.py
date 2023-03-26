@@ -1,5 +1,5 @@
 '''
-transaction.py is an Object Relational Mapping to the transaction database
+transaction.py is an Object Relational Mapping to the tracker database
 
 The ORM will work map SQL rows with the schema
 
