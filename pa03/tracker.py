@@ -49,16 +49,13 @@ def process_args(arglist):
         else:
             transactions.delete_transaction(arglist[1])
     elif arglist[0] == "7":
-        transactions.summarize_by_date()  #dont know if this works
+        transactions.summarize_by_date() 
     elif arglist[0] == "8":
-        print("not yet implemented")
-        #transactions.summarize_by_month()
+        transactions.summarize_by_month()
     elif arglist[0] == "9":
-        print("not yet implemented")
-        #transactions.summarize_by_year()
+        transactions.summarize_by_year()
     elif arglist[0] == "10":
-        print("not yet implemented")
-        #transactions.summarize_by_category()
+        transactions.summarize_by_category()
     elif arglist[0] == "11":
         print_usage()
     else:
