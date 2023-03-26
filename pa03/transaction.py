@@ -1,5 +1,5 @@
 '''
-transaction.py is an Object Relational Mapping to the transaction database
+transaction.py is an Object Relational Mapping to the tracker database
 
 The ORM will work map SQL rows with the schema
 
@@ -35,8 +35,8 @@ class Transaction():
         categories = [row[0] for row in rows]
         return categories
 
-    def add_category(self, category): #edited by Noah
-        self.cursor.execute('INSERT INTO transactions (category) VALUES (?)', ( ))
+    def add_category(self, category):
+        self.cursor.execute('INSERT INTO transactions (category) VALUES (?)', (category))
         self.con.commit()
 
     def modify_category(self, old, new):
@@ -81,16 +81,5 @@ class Transaction():
         sum = [{'category': row[0], 'total': row[1]} for row in rows]
         return sum
     
-    def print_menu(self):
-        print("Transaction Tracker Menu:")
-        print("1. Show categories")
-        print("2. Add category")
-        print("3. Modify category")
-        print("4. Show transactions")
-        print("5. Add transaction")
-        print("6. Delete transaction")
-        print("7. Summarize transactions by date")
-        print("8. Summarize transactions by month")
-        print("9. Summarize transactions by year")
-        print("10. Summarize transactions by category")
-        print("11. Quit")
+
+  
