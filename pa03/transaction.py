@@ -12,13 +12,14 @@ import os
 def toDict(t):
     '''t is a tuple (item #, amount, category, date, description)'''
     print('t='+str(t))
-    todo = {'item_number':t[0], 'amount':t[1], 'category':t[2], 'date':t[3], 'description':t[4]}
-    return todo
+    transaction = {'item_number':t[0], 'amount':t[1], 'category':t[2], 'date':t[3], 'description':t[4]}
+    return transaction
 
 class Transaction():
     def __init__(self, db_location):
-        self.conn = sqlite3.connect(db_location)
-        self.cursor.execute('''CREAT TABLE IF NOT EXISTS transactions (
+        self.con = sqlite3.connect(db_location)
+        self.cursor = self.con.cursor()
+        self.cursor.execute('''CREATE TABLE IF NOT EXISTS transactions (
         item_number INTEGER,
         amount REAL,
         category TEXT,
@@ -26,7 +27,7 @@ class Transaction():
         description TEXT
         )
         ''')
-        self.conn.commit()
+        self.con.commit()
     
     def show_categories(self):
         self.cursor.execute('SELECT DISTINCT category FROM transactions')
@@ -36,11 +37,11 @@ class Transaction():
 
     def add_category(self):
         self.cursor.execute('INSERT INTO transactions (category) VALUES (?)', (category,))
-        self.conn.commit()
+        self.con.commit()
 
     def modify_category(self, old, new):
         self.cursor.execute('UPDATE transactions SET category=? WHERE category=?', (new, old))
-        self.conn.commit()
+        self.con.commit()
 
     def show_transactions(self):
         self.cursor.execute('SELECT * FROM transactions')
@@ -50,7 +51,8 @@ class Transaction():
 
     def add_transaction(self, transaction):
         self.cursor.execute('INSERT INTO transactions VALUES(?,?,?,?,?)', (transaction['item_number'], transaction['amount'], transaction['category'], transaction['date'], transaction['description']))
-        self.conn.commit()
+        self.con.commit()
 
     def delete_transaction(self, number):
-        self.cursor.commit('DELETE FROM transactions where item_n')
+        self.cursor.execute('DELETE FROM transactions WHERE item_number=?', (number))
+        self.con.commit()
