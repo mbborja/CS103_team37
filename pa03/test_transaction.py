@@ -61,29 +61,3 @@ def test_transaction():
 
 if __name__ == "__main__":
     test_transaction()
-
-
-    # x1 = Interval(0.9,1.1)
-    # x2 = Interval(1.999,2.001)
-    # x3 = Interval(-1,1)
-    # x4 = Interval(10,10)
-    # assert f'x1= {x1}' == "x1= [0.9,1.1]"
-    # assert f'x2= {x2}' == "x2= [1.999,2.001]"
-    # assert f'x3= {x3}' == "x3= [-1,1]"
-    # assert f'x4= {x4}' == "x4= [10,10]"
-    # assert f'x1+x2= {x1 + x2}' == "x1+x2= [2.899,3.101]"
-    # assert f'x2*x3= {x2 * x3}' == "x2*x3= [-2.001,2.001]"
-    # assert f'x3/x4= {x3 / x4}' == "x3/x4= [-0.1,0.1]"
-    # assert f'x4-x1*x2/(x4+x3)-(x1+x2) {x4-x1*x2/(x4+x3)-(x1+x2)}' == "x4-x1*x2/(x4+x3)-(x1+x2) [6.6544333333333325,6.937445454545455]"
-    # assert f'x1.union(x2)= {x1.union(x2)}' == "x1.union(x2)= [0.9,2.001]"
-    # assert f'x1.intersect(x3)={x1.intersect(x3)}' == "x1.intersect(x3)=[0.9,1]"
-    # assert f'x3.intersect(x1)={x3.intersect(x1)}' == "x3.intersect(x1)=[0.9,1]"
-    # assert f'x1.intersects(x3)={x1.intersects(x3)}' == "x1.intersects(x3)=True"
-    # assert f'x1.intersects(x2)={x1.intersects(x2)}' == "x1.intersects(x2)=False"
-    # with pytest.raises(Exception, match="Two Intervals not intersecting") as exc_info:
-    #     x1.intersect(x4)
-    # x5 = Interval(0,10)
-    # with pytest.raises(Exception, match="internal division by zero") as exc_info:
-    #     x1/x5
-    # with pytest.raises(Exception, match="empty interval") as exc_info:
-    #     Interval(0,-0.1)
