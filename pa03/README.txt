@@ -97,44 +97,35 @@ command> 8
 ----------------------------------------
 
 Pylint Output:
-
+________________________________________
 For transaction.py
+pylint transaction.py
 ************* Module transaction
 transaction.py:15:0: C0301: Line too long (103/100) (line-too-long)
-transaction.py:31:0: C0303: Trailing whitespace (trailing-whitespace)
-transaction.py:53:0: C0301: Line too long (200/100) (line-too-long)
-transaction.py:66:0: C0301: Line too long (108/100) (line-too-long)
-transaction.py:67:0: C0301: Line too long (111/100) (line-too-long)
-transaction.py:71:0: C0303: Trailing whitespace (trailing-whitespace)
-transaction.py:72:38: C0303: Trailing whitespace (trailing-whitespace)
-transaction.py:73:0: C0301: Line too long (110/100) (line-too-long)
-transaction.py:77:0: C0303: Trailing whitespace (trailing-whitespace)
-transaction.py:83:0: C0303: Trailing whitespace (trailing-whitespace)
-transaction.py:85:0: C0303: Trailing whitespace (trailing-whitespace)
-transaction.py:12:0: C0103: Function name "toDict" doesn't conform to snake_case naming style (invalid-name)
-transaction.py:12:11: C0103: Argument name "t" doesn't conform to snake_case naming style (invalid-name)
+transaction.py:35:0: C0303: Trailing whitespace (trailing-whitespace)
+transaction.py:87:0: C0301: Line too long (200/100) (line-too-long)
+transaction.py:106:0: C0301: Line too long (108/100) (line-too-long)
+transaction.py:110:0: C0301: Line too long (111/100) (line-too-long)
+transaction.py:114:0: C0303: Trailing whitespace (trailing-whitespace)
+transaction.py:115:38: C0303: Trailing whitespace (trailing-whitespace)
+transaction.py:119:0: C0301: Line too long (110/100) (line-too-long)
+transaction.py:123:0: C0303: Trailing whitespace (trailing-whitespace)
+transaction.py:132:0: C0303: Trailing whitespace (trailing-whitespace)
+transaction.py:134:0: C0303: Trailing whitespace (trailing-whitespace)
+transaction.py:12:12: C0103: Argument name "t" doesn't conform to snake_case naming style (invalid-name)
 transaction.py:18:0: C0115: Missing class docstring (missing-class-docstring)
-transaction.py:32:4: C0116: Missing function or method docstring (missing-function-docstring)
-transaction.py:38:4: C0116: Missing function or method docstring (missing-function-docstring)
-transaction.py:42:4: C0116: Missing function or method docstring (missing-function-docstring)
-transaction.py:46:4: C0116: Missing function or method docstring (missing-function-docstring)
-transaction.py:52:4: C0116: Missing function or method docstring (missing-function-docstring)
-transaction.py:56:4: C0116: Missing function or method docstring (missing-function-docstring)
-transaction.py:60:4: C0116: Missing function or method docstring (missing-function-docstring)
-transaction.py:63:8: W0622: Redefining built-in 'sum' (redefined-builtin)
-transaction.py:66:4: C0116: Missing function or method docstring (missing-function-docstring)
-transaction.py:69:8: W0622: Redefining built-in 'sum' (redefined-builtin)
-transaction.py:72:4: C0116: Missing function or method docstring (missing-function-docstring)
-transaction.py:75:8: W0622: Redefining built-in 'sum' (redefined-builtin)
-transaction.py:78:4: C0116: Missing function or method docstring (missing-function-docstring)
-transaction.py:81:8: W0622: Redefining built-in 'sum' (redefined-builtin)
+transaction.py:103:8: W0622: Redefining built-in 'sum' (redefined-builtin)
+transaction.py:112:8: W0622: Redefining built-in 'sum' (redefined-builtin)
+transaction.py:121:8: W0622: Redefining built-in 'sum' (redefined-builtin)
+transaction.py:130:8: W0622: Redefining built-in 'sum' (redefined-builtin)
 transaction.py:10:0: W0611: Unused import os (unused-import)
 
------------------------------------
-Your code has been rated at 4.63/10
+------------------------------------------------------------------
+Your code has been rated at 6.79/10 (previous run: 4.63/10, +2.16)
 
 ________________________________________
 For test_transaction.py
+pylint test_transaction
 ************* Module test_transaction
 test_transaction.py:11:0: C0303: Trailing whitespace (trailing-whitespace)
 test_transaction.py:15:0: C0301: Line too long (104/100) (line-too-long)
