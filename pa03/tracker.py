@@ -36,7 +36,7 @@ def process_args(arglist):
         else:
             transactions.modify_category(arglist[1], arglist[2])
     elif arglist[0] == "4":
-        transactions.show_transactions()
+        print(transactions.show_transactions())
     elif arglist[0] == "5":
         if len(arglist) != 6:
             print_usage()
@@ -49,13 +49,13 @@ def process_args(arglist):
         else:
             transactions.delete_transaction(arglist[1])
     elif arglist[0] == "7":
-        transactions.summarize_by_date() 
+        print(transactions.summarize_by_date()) 
     elif arglist[0] == "8":
-        transactions.summarize_by_month()
+        print(transactions.summarize_by_month())
     elif arglist[0] == "9":
-        transactions.summarize_by_year()
+        print(transactions.summarize_by_year())
     elif arglist[0] == "10":
-        transactions.summarize_by_category()
+        print(transactions.summarize_by_category())
     elif arglist[0] == "11":
         print_usage()
     else:
