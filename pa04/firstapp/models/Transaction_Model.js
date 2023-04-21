@@ -7,9 +7,13 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 
 var transactionSchema = Schema( {
   item: String,
+  item_num: Number,
+  amount: Number,
+  category: String,
+  date: Date,
+  description: String,
   completed: Boolean,
   createdAt: Date,
-  priority: Number,
   userId: {type:ObjectId, ref:'user' }
 } );
 

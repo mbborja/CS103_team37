@@ -31,11 +31,11 @@ router.get('/transaction/',
       if (show) { // show is completed or transaction, so just show some items
         items = 
           await Transaction_Model.find({userId:req.user._id, completed})
-                        .sort({completed:1,priority:1,createdAt:1})
+                        .sort({description:1,amount:1,date:1})
       }else {  // show is null, so show all of the items
         items = 
           await Transaction_Model.find({userId:req.user._id})
-                        .sort({completed:1,priority:1,createdAt:1})
+                        .sort({date:-1})
 
       }
             res.render('transaction_view',{items,show,completed});
@@ -48,11 +48,16 @@ router.post('/transaction',
   isLoggedIn,
   async (req, res, next) => {
       const transaction = new Transaction_Model(
-        {item:req.body.item,
+        {
+         item:req.body.item,
          createdAt: new Date(),
          completed: false,
          priority: parseInt(req.body.priority),
-         userId: req.user._id
+         userId: req.user._id,
+          description: req.body.description,
+          category: req.body.category,
+          amount: req.body.amount,
+          date: req.body.date,
         })
       await transaction.save();
       res.redirect('/transaction')
@@ -94,18 +99,18 @@ router.get('/transaction/edit/:itemId',
        await Transaction_Model.findById(req.params.itemId);
       //res.render('edit', { item });
       res.locals.item = item
-      res.render('edit')
+      res.render('transaction_edit')
       //res.json(item)
 });
 
-router.post('/transaction/updateTransaction_Model',
+router.post('/transaction/updateTransaction',
   isLoggedIn,
   async (req, res, next) => {
-      const {itemId,item,priority} = req.body;
+      const {itemId,description,category,amount,date} = req.body;
       console.log("inside /transaction/complete/:itemId");
       await Transaction_Model.findOneAndUpdate(
         {_id:itemId},
-        {$set: {item,priority}} );
+        {$set: {description,category,amount,date}} );
       res.redirect('/transaction')
 });
 
