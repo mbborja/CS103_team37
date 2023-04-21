@@ -1,10 +1,11 @@
 
 'use strict';
+
 const mongoose = require( 'mongoose' );
 const Schema = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
-var toDoItemSchema = Schema( {
+var transactionSchema = Schema( {
   item: String,
   completed: Boolean,
   createdAt: Date,
@@ -12,4 +13,4 @@ var toDoItemSchema = Schema( {
   userId: {type:ObjectId, ref:'user' }
 } );
 
-module.exports = mongoose.model( 'ToDoItem', toDoItemSchema );
+module.exports = mongoose.model( 'Transaction_Model', transactionSchema );
