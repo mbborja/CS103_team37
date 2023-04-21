@@ -128,7 +128,7 @@ router.get('/transaction/byUser',
                    select:['username','age']})
 
         //res.json(results)
-        res.render('summarizeByUser',{results})
+        res.render('transaction_summarizeByUser',{results})
 });
 
 
