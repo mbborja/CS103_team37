@@ -28,17 +28,29 @@ router.get('/transaction/',
       const show = req.query.show
       const completed = show=='completed'
       let items=[]
-      if (show) { // show is completed or transaction, so just show some items
-        items = 
-          await Transaction_Model.find({userId:req.user._id, completed})
-                        .sort({description:1,amount:1,date:1})
-      }else {  // show is null, so show all of the items
+      if (show=='sortby_category') { // show is completed or transaction, so just show some items
         items = 
           await Transaction_Model.find({userId:req.user._id})
-                        .sort({date:-1})
-
+                        .sort({category:1,amount:1,date:1})
+      }else if (show=='sortby_amount') {  // show is null, so show all of the items
+        items = 
+          await Transaction_Model.find({userId:req.user._id})
+                        .sort({amount:1})
+      }else if (show=='sortby_description') {
+        items = 
+          await Transaction_Model.find({userId:req.user._id})
+                        .sort({description:1})    
+      }else if (show=='sortby_date') {
+        items = 
+          await Transaction_Model.find({userId:req.user._id})
+                        .sort({date:1})
+      } else {
+        items = 
+          await Transaction_Model.find({userId:req.user._id})
+                        .sort({description:1})
       }
-            res.render('transaction_view',{items,show,completed});
+      
+      res.render('transaction_view',{items,show,completed});
 });
 
 
@@ -114,26 +126,20 @@ router.post('/transaction/updateTransaction',
       res.redirect('/transaction')
 });
 
-router.get('/transaction/byUser',
+router.get('/transaction/byCategory',
   isLoggedIn,
   async (req, res, next) => {
       let results =
             await Transaction_Model.aggregate(
                 [ 
                   {$group:{
-                    _id:'$userId',
-                    total:{$count:{}}
+                    _id:'$category',
+                    total:{$sum:"$amount"}
                     }},
                   {$sort:{total:-1}},              
                 ])
-              
-        results = 
-           await User.populate(results,
-                   {path:'_id',
-                   select:['username','age']})
 
-        //res.json(results)
-        res.render('transaction_summarizeByUser',{results})
+        res.render('transaction_groupByCategory',{results})
 });
 
 
