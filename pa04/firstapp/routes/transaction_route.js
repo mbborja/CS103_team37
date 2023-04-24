@@ -35,7 +35,7 @@ router.get('/transaction/',
       }else if (show=='sortby_amount') {  // show is null, so show all of the items
         items = 
           await Transaction_Model.find({userId:req.user._id})
-                        .sort({amount:1})
+                        .sort({amount:-1})
       }else if (show=='sortby_description') {
         items = 
           await Transaction_Model.find({userId:req.user._id})
