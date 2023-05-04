@@ -1,0 +1,97 @@
+<h1> Transactions for <%= user.username %>
+</h1>
+
+<div class="row">
+  <div class="col">
+    <p> Here is your list of things to do! </p>
+
+    <!-- <p class="m-2">
+      <% if (show=='completed' ){%>
+        <a class="btn btn-lg btn-primary" href="?show=transaction">(Show tasks to do)</a>
+        <% }else {%>
+          <a class="btn btn-lg btn-primary" href="?show=completed">(Show completed tasks)</a>
+          <%}%>
+    </p> -->
+    
+    <table class="table table-bordered table-striped" style="width: 70%;">
+      <tbody>
+        <tr>
+          <td><a class="btn btn btn-primary" href="transaction/byCategory">group by category</a></td>
+          <td><a class="btn btn btn-primary" href="?show=sortby_category">sort by category</a></td>
+          <td><a class="btn btn btn-primary" href="?show=sortby_amount">sort by amount</a></td>
+          <td><a class="btn btn btn-primary" href="?show=sortby_description">sort by description</a></td>
+          <td><a class="btn btn btn-primary" href="?show=sortby_date">sort by date</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table table-bordered table-striped">
+      <thead>
+          <tr>
+              <th>description</th>
+              <th>amount</th>
+              <th>category</th>
+              <th>description</th>
+              <th>date</th>
+              <th>edit</th>
+          </tr>
+      </thead>
+      <tbody>
+        <% items.forEach(item=> { %>
+          <tr>
+            <td><%= item.description %></td>
+            <td><%= item.amount %></td>
+            <td><%= item.category %></td>
+            <td><%= item.date.toLocaleDateString('en-US', {weekday: 'long', month: 'long', day: '2-digit', year: 'numeric'}).replace(/,/g, '') %></td>
+            <td>
+              <a href="/transaction/remove/<%=item._id %>">
+                <i class="bi bi-trash"></i>
+              </a>
+            </td>
+            <td>
+              <a href="/transaction/edit/<%=item._id %>">
+                <i class="bi bi-pencil-square"></i>
+              </a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+  
+  </div>
+
+</div>
+<div class="row">
+  <div class="column">
+    <h1>Add a New Transaction</h1>
+    <form method="post" action="transaction">
+      <input 
+        type="text"
+        name="description"
+        placeholder="description"
+      />
+      <br>
+      <input 
+        type="text"
+        name="category"
+        placeholder="category"
+      />
+      <br>
+      <input 
+        type="text"
+        name="amount"
+        placeholder="amount"
+      />
+      <br>
+      <input 
+        type="text"
+        name="date"
+        placeholder="mm/dd/yy"
+      />
+      <br>
+      <input type="submit" value="store">
+    </form>
+  </div>
+ 
+</div>
