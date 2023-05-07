@@ -1,0 +1,40 @@
+<pre>
+    <%= JSON.stringify(item,null,5) %>
+</pre>
+<h1>Edit Adventurer</h1>
+    <form method="post" action="/adventure/updateAdventure">
+      
+        <input type="hidden" name="itemId" value="<%= item._id %>">
+      <input 
+        type="text"
+        name="name"
+        placeholder="name"
+      />
+      <br>
+      <input 
+        type="text"
+        name="game_class"
+        placeholder="class"
+      />
+      <br>
+      <input 
+        type="text"
+        name="background"
+        placeholder="background"
+      />
+      <br>
+      <input 
+        type="text"
+        name="race"
+        placeholder="race"
+      />
+      <br>
+      <input 
+        type="text"
+        name="alignment"
+        placeholder="alignment"
+      />
+      <br>
+
+      <input type="submit" value="store">
+    </form>

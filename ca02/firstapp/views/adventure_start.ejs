@@ -1,0 +1,27 @@
+<h1> Custom Adventure</h1>
+
+<br>
+
+<h3> Roster Summary</h3>
+<table class="table table-bordered table-striped">
+    <tbody>
+    <% active_roster.forEach(item => { %>
+        <tr>
+        <td><%= item.name %></td>
+        <td><%= item.game_class %></td>
+        <td><%= item.background %></td>
+        <td><%= item.alignment %></td>
+        </tr>
+    <% }) %>
+    </tbody>
+</table>
+<h3> Generated Story: </h3>
+<br>
+<p>
+    <%= message %>
+</p>
+<br>
+
+<a href="/adventure">
+<h4> Return Home </h4>
+</a>

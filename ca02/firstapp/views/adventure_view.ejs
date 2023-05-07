@@ -1,0 +1,139 @@
+<h1> Custom Adventure for <%= user.username %>
+</h1>
+
+<div class="row">
+  <div class="col">
+    <p> Create your own custom random Adventure! </p>
+    <br>
+    <% if (show=='roster'){%>
+      <h1> Your Active Adventure Roster </h1>
+    <% }else {%>
+      <h1> Listing All Adventurers</h1>
+    <%}%>
+    <br>
+
+    <table class="table table-bordered table-striped" style="width: 70%;">
+      <tbody>
+        <tr>
+          <td><a class="btn btn btn-primary" href="?show=roster">Show current roster</a></td>
+          <td><a class="btn btn btn-primary" href="?show=all">Show all adventurers</a></td>
+
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table table-bordered table-striped">
+      <thead>
+          <tr>
+              <th>Name</th>
+              <th>Class</th>
+              <th>Background</th>
+              <th>Race</th>
+              <th>Alignment</th>
+              <% if (show=='roster'){%>
+                <th>Roster Remove</th>
+              <% }else {%>
+                <th>Roster Add</th>
+              <%}%>
+              <th>Remove</th>
+              <th>edit</th>
+          </tr>
+      </thead>
+      <tbody>
+        <% items.forEach(item=> { %>
+          <tr>
+            <td><%= item.name %></td>
+            <td><%= item.game_class %></td>
+            <td><%= item.background %></td>
+            <td><%= item.race %></td>
+            <td><%= item.alignment %></td>
+            <% if (show=='roster'){%>
+              <td>
+                <a href="/adventure/roster_remove/<%=item._id %>">
+                  <i class="bi bi-person-slash"></i>
+                </a>
+              </td> 
+            <% }else {%>
+              <td>
+                <a href="/adventure/roster_add/<%=item._id %>">
+                  <i class="bi bi-person-plus-fill"></i>
+                </a>
+              </td>
+            <%}%>
+            <td>
+              <a href="/adventure/remove/<%=item._id %>">
+                <i class="bi bi-trash"></i>
+              </a>
+            </td>
+            <td>
+              <a href="/adventure/edit/<%=item._id %>">
+                <i class="bi bi-pencil-square"></i>
+              </a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+  
+  </div>
+
+</div>
+
+<% if (show!='roster'){%>
+<div class="row">
+  <div class="column">
+    <h1>Add a New Adventurer</h1>
+    <form method="post" action="adventure">
+      <input 
+        type="text"
+        name="name"
+        placeholder="name"
+      />
+      <br>
+      <input 
+        type="text"
+        name="game_class"
+        placeholder="class"
+      />
+      <br>
+      <input 
+        type="text"
+        name="background"
+        placeholder="background"
+      />
+      <br>
+      <input 
+        type="text"
+        name="race"
+        placeholder="race"
+      />
+      <br>
+      <input 
+        type="text"
+        name="alignment"
+        placeholder="alignment"
+      />
+      <br>
+
+      <input type="submit" value="store">
+    </form>
+  </div>
+  <%}%>
+
+  <% if (show=='roster'){%>
+    <br>
+    <div class="row">
+      <div class="column">
+        <a href="/adventure/start">
+          <h1>Start Adventure!</h1>
+        </a>
+      </div>
+    </div>
+    
+  <% }else {%>
+    <a href="/adventure/?show=roster">
+      Go to Roster to start Adventure
+    </a>
+  <%}%>
+</div>
